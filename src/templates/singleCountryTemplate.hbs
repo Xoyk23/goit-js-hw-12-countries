@@ -1,0 +1,14 @@
+{{#each this}}
+  <li>
+    <img  class ="container-fluid" src="{{flag}}" alt="Флаг {{name}}" width="320">
+    <h2>{{name}}</h2>
+    <p><b>Столица: {{capital}}</b> </p>
+    <p><b>Население: {{population}}</b></p>
+    <ul><b>Официальные языки:
+        {{#each languages}}
+        <li>{{this.name}}</li>
+        {{/each}}
+        </b>
+      </ul>
+    </li>
+{{/each}}
