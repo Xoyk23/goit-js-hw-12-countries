@@ -3,7 +3,7 @@ import addCountriesMarkup, {
   addCountryMarkup,
   resetUi,
 } from './countriesMarkup.js';
-import myError from './notify.js';
+import { myError, newError } from './notify.js';
 
 const _ = require('lodash');
 
@@ -24,8 +24,10 @@ function fetchCountries(searchQuery) {
       return response.json();
     })
     .then(data =>
-      data.filter(({ country, name }) =>
-        name.toLowerCase().includes(refs.searchForm.value.toLowerCase()),
+      data.filter(country =>
+        country.name
+          .toLowerCase()
+          .includes(refs.searchForm.value.toLowerCase()),
       ),
     )
     .then(dataCountries => {
@@ -37,14 +39,12 @@ function fetchCountries(searchQuery) {
         dataCountries.map(country => {
           addCountryMarkup(country);
         });
-      } else if (dataCountries.length >= 10) {
+      } else if (dataCountries.length > 10) {
         refs.countriesContainer.innerHTML = '';
         myError();
       }
     })
-    .catch(error => {
-      console.error('Error: ', error);
-    });
+    .catch(newError());
 }
 
 refs.searchForm.addEventListener('input', searchQuery);
