@@ -29,16 +29,16 @@ function fetchCountries(searchQuery) {
           .includes(refs.searchForm.value.toLowerCase()),
       ),
     )
-    .then(countriesArray => {
-      if (countriesArray.length !== 1 && countriesArray.length <= 10) {
+    .then(dataCountries => {
+      if (dataCountries.length !== 1 && dataCountries.length <= 10) {
         refs.countriesContainer.innerHTML = '';
-        countriesArray.map(country => addCountriesMarkup(country));
-      } else if (countriesArray.length === 1) {
+        dataCountries.map(country => addCountriesMarkup(country));
+      } else if (dataCountries.length === 1) {
         refs.countriesContainer.innerHTML = '';
-        countriesArray.map(country => {
+        dataCountries.map(country => {
           addCountryMarkup(country);
         });
-      } else if (countriesArray.length > 10) {
+      } else if (dataCountries.length > 10) {
         refs.countriesContainer.innerHTML = '';
         error({
           title: 'Your query must contain more than one character!',
