@@ -7,4 +7,11 @@ function myError() {
   });
 }
 
+// function newError() {
+//   error({
+//     title: 'Oops!',
+//     text: 'Something wrong, try reinput!',
+//   });
+// }
+
 export default myError;

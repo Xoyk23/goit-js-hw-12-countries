@@ -4,6 +4,7 @@ import addCountriesMarkup, {
   resetUi,
 } from './countriesMarkup.js';
 import myError from './notify.js';
+
 const _ = require('lodash');
 
 refs.searchForm.value = '';
@@ -40,6 +41,9 @@ function fetchCountries(searchQuery) {
         refs.countriesContainer.innerHTML = '';
         myError();
       }
+    })
+    .catch(error => {
+      console.error('Error: ', error);
     });
 }
 
