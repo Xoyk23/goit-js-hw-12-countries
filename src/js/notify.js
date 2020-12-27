@@ -1,4 +1,13 @@
-const { alert, notice, info, success, error } = require('@pnotify/core');
+// const { alert, notice, info, success, error } = require('@pnotify/core');
+import {
+  error,
+  success,
+  info,
+  defaults,
+  defaultModules,
+  Stack,
+} from '@pnotify/core/dist/PNotify.js';
+import * as PNotifyMobile from '@pnotify/mobile/dist/PNotifyMobile.js';
 
 function myError() {
   error({
@@ -14,4 +23,4 @@ function newError() {
   });
 }
 
-export { myError, newError };
+export { error, success, info };

@@ -3,7 +3,7 @@ import addCountriesMarkup, {
   addCountryMarkup,
   resetUi,
 } from './countriesMarkup.js';
-import { myError, newError } from './notify.js';
+import { error, success, info } from './notify.js';
 
 const _ = require('lodash');
 
@@ -29,23 +29,32 @@ function fetchCountries(searchQuery) {
           .includes(refs.searchForm.value.toLowerCase()),
       ),
     )
-    .then(dataCountries => {
-      if (dataCountries.length !== 1 && dataCountries.length <= 10) {
+    .then(countriesArray => {
+      if (countriesArray.length !== 1 && countriesArray.length <= 10) {
         refs.countriesContainer.innerHTML = '';
-        dataCountries.map(country => addCountriesMarkup(country));
-      } else if (dataCountries.length === 1) {
+        countriesArray.map(country => addCountriesMarkup(country));
+      } else if (countriesArray.length === 1) {
         refs.countriesContainer.innerHTML = '';
-        dataCountries.map(country => {
+        countriesArray.map(country => {
           addCountryMarkup(country);
         });
-      } else if (dataCountries.length > 10) {
+      } else if (countriesArray.length > 10) {
         refs.countriesContainer.innerHTML = '';
-        myError();
+        error({
+          title: 'Your query must contain more than one character!',
+          sticker: false,
+        });
       }
     })
-    .catch(newError());
+    .catch(function () {
+      error({
+        title: 'Oops!',
+        text: 'Something wrong, try reinput!',
+      });
+    });
 }
 
 refs.searchForm.addEventListener('input', searchQuery);
+refs.countryNameForm.addEventListener('submit', e => e.preventDefault());
 
 export default fetchCountries;
